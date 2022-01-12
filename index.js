@@ -2,6 +2,7 @@ const chalk = require('chalk')
 const { Command } = require('commander')
 const {listContacts, addContact, getContactById, removeContact} = require ('./contact')
 
+
 const program = new Command();
 program
   .requiredOption('-a, --action <type>', 'choose action')
@@ -48,7 +49,9 @@ const invokeAction = async({ action, id, name, email, phone }) => {
     case 'remove':
       const delContact = await removeContact(id)
       if (delContact) {
-        console.table(delContact);
+        console.log(chalk.green('Contact deleted'))
+      } else {
+        console.log(chalk.red('Contact not found'));
       }
       break;
 
